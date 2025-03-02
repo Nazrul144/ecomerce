@@ -6,7 +6,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
+import { FaSearch } from "react-icons/fa";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -25,6 +27,7 @@ const Products = () => {
       const data = await res.json();
       setProducts(data.res);
       setVisible(data.res.slice(0,6))
+      setLoading(false)
     
     };
     getAllProducts();
@@ -35,13 +38,20 @@ const Products = () => {
   }
   
   return (
-    <div className="w-[1100px] mx-auto">
-      <div className="flex justify-center items-center text-2xl text-red-400">
+    <div className="lg:w-[1100px] mx-auto">
+      <h1 className="font-bold text-center mt-4">Search Your Products</h1>
+      <div className="lg:w-[1100px] border-2 border-amber-400 rounded-xl mx-auto mt-4">
+        <input className="px-4 py-2 lg:w-full relative" type="text" placeholder="Search..." />
+        <FaSearch className="absolute right-82 top-24 text-2xl" />
+      </div>
+      <div className="flex justify-center items-center text-2xl text-red-400 mt-20">
         {
-          loading ? <span>Loading...</span> : ""
+          loading ?    <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+        </Box> : ""
         }
       </div>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {visible?.map((product) => (
           <Card key={product._id} sx={{ maxWidth: 345 }}>
             <Image src={product.image} height={200} width={300} alt="Image" />
