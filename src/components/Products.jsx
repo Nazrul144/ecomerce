@@ -10,7 +10,9 @@ import { Button } from "@mui/material";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [visibleProducts, setVisibleProducts] = useState(6)
+  const [visible, setVisible] = useState(6)
+
+
   useEffect(() => {
     const getAllProducts = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products/api`);
@@ -21,14 +23,14 @@ const Products = () => {
   }, []);
 
   const handleIncrement = ()=>{
-    setVisibleProducts(visibleProducts +2)
+    setVisible(visible + 1)
   }
-
+  
   return (
     <div className="w-[1100px] mx-auto">
       <h1>This is my product page</h1>
       <div className="grid grid-cols-3 gap-6">
-        {products?.slice(0, visibleProducts).map((product) => (
+        {products?.slice(0, visible).map((product) => (
           <Card key={product._id} sx={{ maxWidth: 345 }}>
             <Image src={product.image} height={200} width={300} alt="Image" />
             <CardContent>
@@ -49,7 +51,7 @@ const Products = () => {
         </div>
       </div>
       <div className="flex justify-center items-center mt-3">
-      <Button onClick={handleIncrement} color="secondary">See More</Button>
+      <Button onClick={handleIncrement}  color="secondary">See More</Button>
       </div>
     </div>
   );
