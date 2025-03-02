@@ -10,7 +10,12 @@ import { Button } from "@mui/material";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [visible, setVisible] = useState(6)
+  const [visible, setVisible] = useState([])
+
+  //Showing all data after see more button click:
+  // Step1: declare two state where one state will contain all data and another state will contain 6 data. And you will set it like setProducts(data.res) and for second state like: setVisible(data.res.slice(0,6)). Remember, when you keep 6 the data in the 2nd state you must slice it like slice(0, 6). now map the state and show six data in UI. Then when user will click see more button this time call a function and from the function setVisible(products)
+  
+  //Steps2: If you want showing 6 data step by step, this time just declare 2nd stare and assign static 6 value, now slice products when map like (0, stateName) that you have assigned 6. If user click see more button just call a function and setVisible(visible+6). That means add the value with it. How easy the process it right?
 
 
   useEffect(() => {
@@ -18,19 +23,21 @@ const Products = () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products/api`);
       const data = await res.json();
       setProducts(data.res);
+      setVisible(data.res.slice(0,6))
+    
     };
     getAllProducts();
   }, []);
 
   const handleIncrement = ()=>{
-    setVisible(visible + 1)
+    setVisible(products)
   }
   
   return (
     <div className="w-[1100px] mx-auto">
       <h1>This is my product page</h1>
       <div className="grid grid-cols-3 gap-6">
-        {products?.slice(0, visible).map((product) => (
+        {visible?.map((product) => (
           <Card key={product._id} sx={{ maxWidth: 345 }}>
             <Image src={product.image} height={200} width={300} alt="Image" />
             <CardContent>
