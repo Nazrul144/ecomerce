@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [visible, setVisible] = useState([])
+  const [loading, setLoading] = useState(true);
 
   //Showing all data after see more button click:
   // Step1: declare two state where one state will contain all data and another state will contain 6 data. And you will set it like setProducts(data.res) and for second state like: setVisible(data.res.slice(0,6)). Remember, when you keep 6 the data in the 2nd state you must slice it like slice(0, 6). now map the state and show six data in UI. Then when user will click see more button this time call a function and from the function setVisible(products)
@@ -35,7 +36,11 @@ const Products = () => {
   
   return (
     <div className="w-[1100px] mx-auto">
-      <h1>This is my product page</h1>
+      <div className="flex justify-center items-center text-2xl text-red-400">
+        {
+          loading ? <span>Loading...</span> : ""
+        }
+      </div>
       <div className="grid grid-cols-3 gap-6">
         {visible?.map((product) => (
           <Card key={product._id} sx={{ maxWidth: 345 }}>
