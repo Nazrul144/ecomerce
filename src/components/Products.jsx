@@ -15,6 +15,8 @@ const Products = () => {
   const [visible, setVisible] = useState([])
   const [loading, setLoading] = useState(true);
 
+  const [searchItems, setSearchItems] = useState('')
+
   //Showing all data after see more button click:
   // Step1: declare two state where one state will contain all data and another state will contain 6 data. And you will set it like setProducts(data.res) and for second state like: setVisible(data.res.slice(0,6)). Remember, when you keep 6 the data in the 2nd state you must slice it like slice(0, 6). now map the state and show six data in UI. Then when user will click see more button this time call a function and from the function setVisible(products)
   
@@ -36,13 +38,23 @@ const Products = () => {
   const handleIncrement = ()=>{
     setVisible(products)
   }
+
+  const handleInputChange = (event)=>{
+    setSearchItems(event.target.value)
+    console.log(event.target.value);
+  }
+
+  //Handle search:
+  const handleSearch = (event)=>{
+    console.log(searchItems);
+  }
   
   return (
     <div className="lg:w-[1100px] mx-auto">
       <h1 className="font-bold text-center mt-4">Search Your Products</h1>
       <div className="lg:w-[1100px] border-2 border-amber-400 rounded-xl mx-auto mt-4">
-        <input className="px-4 py-2 lg:w-full relative" type="text" placeholder="Search..." />
-        <FaSearch className="absolute right-82 top-24 text-2xl" />
+        <input onChange={handleInputChange} className="px-4 py-2 lg:w-full relative" type="text" placeholder="Search..." />
+        <FaSearch onClick={handleSearch} className="absolute right-82 top-24 text-2xl" />
       </div>
       <div className="flex justify-center items-center text-2xl text-red-400 mt-20">
         {
