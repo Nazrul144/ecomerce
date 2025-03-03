@@ -20,8 +20,8 @@ const Navbar = () => {
         },
     ]
     return (
-        <div className='w-[1100px] mx-auto bg-gray-400 text-center text-xl '>
-            <div className='space-x-2'>
+        <div className='w-[1100px] mx-auto bg-gray-700 text-center text-xl '>
+            <div className='space-x-2 '>
                 {
                     navMenues?.map((navMenue)=> <Link className={pathName === navMenue.path? 'text-green-500': ""} key={navMenue.path} href={navMenue.path}>{navMenue.title}</Link>)
                 }

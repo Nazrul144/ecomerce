@@ -13,7 +13,7 @@ const AddProducts = () => {
     const handleAddItems = async(event)=>{
         event.preventDefault()
         const items = {
-            product : event.target.product.value,
+            name : event.target.product.value,
             price : event.target.price.value,
             category : event.target.category.value,
             brand : event.target.brand.value,
