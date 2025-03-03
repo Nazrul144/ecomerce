@@ -3,7 +3,7 @@ import React from 'react';
 
 const AddProducts = () => {
 
-    const handleAddItems = (event)=>{
+    const handleAddItems = async(event)=>{
         event.preventDefault()
         const items = {
             product : event.target.product.value,
@@ -14,8 +14,16 @@ const AddProducts = () => {
             image : event.target.image.value,
             description : event.target.description.value,
         }
-
-        console.log(items);
+    
+        const response = await fetch('/addProducts/api',{
+            method: "POST",
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(items)
+        })
+        const result = await response.json()
+        console.log(result);
     }
 
     return (
