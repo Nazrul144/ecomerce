@@ -14,6 +14,10 @@ const Navbar = () => {
             title: 'Products',
             path: '/products'
         },
+        {
+            title: 'Add Products',
+            path: '/addProducts'
+        },
     ]
     return (
         <div className='w-[1100px] mx-auto bg-gray-400 text-center text-xl '>
